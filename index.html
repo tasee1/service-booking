@@ -158,7 +158,7 @@
 
         @media (max-width: 768px) {
             .nav-links { display: none; }
-            .book-btn { display: none; }
+            .book-btn:not(.mobile-menu .book-btn) { display: none; }
             .menu-toggle { display: block; }
             nav { padding: 0.8rem 0; }
             .business-name { font-size: 1.1rem; }
@@ -800,7 +800,7 @@
                     <li><a href="#team">Team</a></li>
                     <li><a href="#reviews">Reviews</a></li>
                 </ul>
-                <button class="book-btn" style="display: flex;">Book Now</button>
+                <button class="book-btn desktop-book-btn" style="display: flex;">Book Now</button>
             </div>
             <button class="menu-toggle" id="menuToggle">☰</button>
         </nav>
