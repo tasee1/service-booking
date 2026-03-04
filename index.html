@@ -158,6 +158,7 @@
 
         @media (max-width: 768px) {
             .nav-links { display: none; }
+            .book-btn:not(.mobile-menu .book-btn) { display: none; }
             .menu-toggle { display: block; }
             nav { padding: 0.8rem 0; }
             .business-name { font-size: 1.1rem; }
@@ -166,23 +167,36 @@
 
         /* HERO SECTION */
         .hero {
-            max-width: 1200px;
-            margin: 0 auto;
+            position: relative;
+            min-height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        var(--hero-bg) center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 4rem 2rem;
             text-align: center;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+            position: relative;
         }
 
         .hero-title {
-            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-size: clamp(2.5rem, 8vw, 4rem);
             font-weight: 800;
             line-height: 1.2;
             margin-bottom: 1.5rem;
             letter-spacing: -1px;
+            color: white;
         }
 
         .hero-subtitle {
-            font-size: 1.1rem;
-            color: var(--text-light);
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
             max-width: 600px;
             margin: 0 auto 2.5rem;
             line-height: 1.7;
@@ -194,6 +208,7 @@
             gap: 2rem;
             flex-wrap: wrap;
             margin-bottom: 2.5rem;
+            align-items: center;
         }
 
         .info-item {
@@ -202,14 +217,32 @@
 
         .info-label {
             font-size: 0.85rem;
-            color: var(--text-light);
+            color: rgba(255, 255, 255, 0.8);
             margin-bottom: 0.3rem;
         }
 
         .info-value {
             font-size: 1rem;
             font-weight: 600;
-            color: var(--text-dark);
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .location-link {
+            cursor: pointer;
+            text-decoration: underline;
+            transition: opacity 0.3s ease;
+        }
+
+        .location-link:hover {
+            opacity: 0.8;
+        }
+
+        .arrow-icon {
+            font-size: 1.2rem;
+            margin-left: 0.5rem;
         }
 
         .hero-actions {
@@ -237,20 +270,30 @@
         }
 
         .btn-secondary {
-            background: var(--secondary-bg);
-            color: var(--text-dark);
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
             padding: 0.9rem 2.5rem;
             border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
-            border: 1px solid var(--border);
+            border: 2px solid white;
             cursor: pointer;
             font-size: 0.95rem;
             transition: all 0.3s ease;
         }
 
         .btn-secondary:hover {
-            background: var(--border);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 70vh;
+                padding: 2rem 1.5rem;
+            }
+            .hero-info {
+                gap: 1rem;
+            }
         }
 
         /* SERVICES SECTION */
@@ -366,6 +409,7 @@
             justify-content: center;
             font-size: 3rem;
             transition: transform 0.3s ease;
+            cursor: pointer;
         }
 
         .gallery-item:hover {
@@ -376,6 +420,97 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+
+        .placeholder-icon {
+            color: #ccc;
+        }
+
+        /* LIGHTBOX */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+        }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 8px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            opacity: 0.7;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+            border-radius: 6px;
+            transition: background 0.3s ease;
+        }
+
+        .lightbox-nav:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .lightbox-prev {
+            left: -80px;
+        }
+
+        .lightbox-next {
+            right: -80px;
+        }
+
+        @media (max-width: 768px) {
+            .lightbox-prev, .lightbox-next {
+                left: auto;
+                right: auto;
+                bottom: 20px;
+            }
+            .lightbox-prev {
+                left: 20px;
+            }
+            .lightbox-next {
+                right: 20px;
+            }
         }
 
         /* TEAM SECTION */
@@ -469,6 +604,7 @@
             justify-content: center;
             font-size: 4rem;
             overflow: hidden;
+            order: 2;
         }
 
         .about-image img {
@@ -480,9 +616,13 @@
         @media (max-width: 768px) {
             .about-content {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
             .about-text h3 {
                 font-size: 1.4rem;
+            }
+            .about-image {
+                order: -1;
             }
         }
 
@@ -587,6 +727,11 @@
             border-radius: 8px;
             border: 1px solid var(--border);
             overflow: hidden;
+            background: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
         }
 
         .map-container iframe {
@@ -645,8 +790,8 @@
     <header>
         <nav>
             <div class="logo-container">
-                <div class="logo-image">B</div>
-                <div class="business-name">Breathe Barbers</div>
+                <div class="logo-image" id="logoImage">B</div>
+                <div class="business-name" id="businessName">Breathe Barbers</div>
             </div>
             <div class="nav-right">
                 <ul class="nav-links">
@@ -655,7 +800,7 @@
                     <li><a href="#team">Team</a></li>
                     <li><a href="#reviews">Reviews</a></li>
                 </ul>
-                <button class="book-btn">Book Now</button>
+                <button class="book-btn" style="display: flex;">Book Now</button>
             </div>
             <button class="menu-toggle" id="menuToggle">☰</button>
         </nav>
@@ -664,38 +809,37 @@
             <a href="#gallery">Gallery</a>
             <a href="#team">Team</a>
             <a href="#reviews">Reviews</a>
-            <button class="book-btn" style="width: 100%;">Book Now</button>
+            <button class="book-btn" style="width: 100%; margin-top: 0.5rem;">Book Now</button>
         </div>
     </header>
 
     <!-- HERO SECTION -->
-    <section class="hero">
-        <h1 class="hero-title">Premium Grooming Experience</h1>
-        <p class="hero-subtitle">
-            Expert barbers dedicated to transforming your look. 
-            Premium services, welcoming atmosphere, exceptional results.
-        </p>
+    <section class="hero" id="heroSection">
+        <div class="hero-content">
+            <h1 class="hero-title" id="heroTitle">Premium Grooming Experience</h1>
+            <p class="hero-subtitle" id="heroSubtitle">
+                Expert barbers dedicated to transforming your look. 
+                Premium services, welcoming atmosphere, exceptional results.
+            </p>
 
-        <div class="hero-info">
-            <div class="info-item">
-                <div class="info-label">RATING</div>
-                <div class="info-value">5.0 ★ (468 reviews)</div>
-            </div>
-            <div class="info-item">
-                <div class="info-label">TEAM</div>
-                <div class="info-value">5 Expert Barbers</div>
-            </div>
-            <div class="info-item">
-                <div class="info-label">LOCATION</div>
-                <div class="info-value" id="locationClickable" style="cursor: pointer; text-decoration: underline;">
-                    Shoreditch, London
+            <div class="hero-info">
+                <div class="info-item">
+                    <div class="info-label">RATING</div>
+                    <div class="info-value" id="heroRating">5.0 ★ (468 reviews)</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">LOCATION</div>
+                    <div class="info-value">
+                        <span class="location-link" id="locationClickable">Shoreditch, London</span>
+                        <span class="arrow-icon">↗</span>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="hero-actions">
-            <button class="btn-primary" onclick="alert('Booking system would go here')">Book Appointment</button>
-            <button class="btn-secondary" onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'})">View Services</button>
+            <div class="hero-actions">
+                <button class="btn-primary" onclick="alert('Booking system would go here')">Book Appointment</button>
+                <button class="btn-secondary" onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'})">View Services</button>
+            </div>
         </div>
     </section>
 
@@ -703,78 +847,8 @@
     <section id="services" class="services-section">
         <h2 class="section-title">Our Services</h2>
 
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-header">
-                    <div class="service-name">Shampoo & Cut</div>
-                    <div class="service-price">£53</div>
-                </div>
-                <div class="service-duration">45 minutes</div>
-                <div class="service-description">
-                    Full wash, style consultation, and expert cut with personalized attention
-                </div>
-                <button class="service-btn">Book Service</button>
-            </div>
-
-            <div class="service-card">
-                <div class="service-header">
-                    <div class="service-name">Back & Sides</div>
-                    <div class="service-price">£43</div>
-                </div>
-                <div class="service-duration">45 minutes</div>
-                <div class="service-description">
-                    Precision fade and shape-up for the sides and back
-                </div>
-                <button class="service-btn">Book Service</button>
-            </div>
-
-            <div class="service-card">
-                <div class="service-header">
-                    <div class="service-name">Beard Trim</div>
-                    <div class="service-price">£25</div>
-                </div>
-                <div class="service-duration">30 minutes</div>
-                <div class="service-description">
-                    Shape, style, and condition your beard with premium products
-                </div>
-                <button class="service-btn">Book Service</button>
-            </div>
-
-            <div class="service-card">
-                <div class="service-header">
-                    <div class="service-name">Luxury Beard</div>
-                    <div class="service-price">£55</div>
-                </div>
-                <div class="service-duration">45 minutes</div>
-                <div class="service-description">
-                    Complete beard treatment with massage and premium grooming
-                </div>
-                <button class="service-btn">Book Service</button>
-            </div>
-
-            <div class="service-card">
-                <div class="service-header">
-                    <div class="service-name">One Grade</div>
-                    <div class="service-price">£20</div>
-                </div>
-                <div class="service-duration">30 minutes</div>
-                <div class="service-description">
-                    Quick and clean - uniform length trim throughout
-                </div>
-                <button class="service-btn">Book Service</button>
-            </div>
-
-            <div class="service-card">
-                <div class="service-header">
-                    <div class="service-name">Re-style</div>
-                    <div class="service-price">£70</div>
-                </div>
-                <div class="service-duration">60 minutes</div>
-                <div class="service-description">
-                    Complete consultation and transformation with styling
-                </div>
-                <button class="service-btn">Book Service</button>
-            </div>
+        <div class="services-grid" id="servicesGrid">
+            <!-- Services will be inserted here by JavaScript -->
         </div>
     </section>
 
@@ -783,52 +857,26 @@
     <!-- GALLERY SECTION -->
     <section id="gallery" class="gallery-section">
         <h2 class="section-title">Our Studio</h2>
-        <div class="gallery-grid">
-            <div class="gallery-item">✂️</div>
-            <div class="gallery-item">💈</div>
-            <div class="gallery-item">🪴</div>
-            <div class="gallery-item">👥</div>
+        <div class="gallery-grid" id="galleryGrid">
+            <!-- Gallery items will be inserted here by JavaScript -->
         </div>
     </section>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+            <img id="lightboxImage" class="lightbox-image" src="" alt="">
+            <button class="lightbox-nav lightbox-prev" onclick="prevImage()">❮</button>
+            <button class="lightbox-nav lightbox-next" onclick="nextImage()">❯</button>
+        </div>
+    </div>
 
     <!-- TEAM SECTION -->
     <section id="team" class="team-section">
         <h2 class="section-title">Meet Our Team</h2>
-        <div class="team-grid">
-            <div class="team-member">
-                <div class="member-image">👨‍🦱</div>
-                <div class="member-name">Frankie</div>
-                <div class="member-role">Senior Barber</div>
-                <div class="member-rating">★★★★★ 5.0</div>
-            </div>
-
-            <div class="team-member">
-                <div class="member-image">👩‍🦱</div>
-                <div class="member-name">Debs</div>
-                <div class="member-role">Senior Barber</div>
-                <div class="member-rating">★★★★★ 5.0</div>
-            </div>
-
-            <div class="team-member">
-                <div class="member-image">👨‍🦱</div>
-                <div class="member-name">Carl</div>
-                <div class="member-role">Senior Barber</div>
-                <div class="member-rating">★★★★★ 5.0</div>
-            </div>
-
-            <div class="team-member">
-                <div class="member-image">👨‍🦲</div>
-                <div class="member-name">Ed</div>
-                <div class="member-role">Senior Barber</div>
-                <div class="member-rating">★★★★★ 5.0</div>
-            </div>
-
-            <div class="team-member">
-                <div class="member-image">👩‍🦱</div>
-                <div class="member-name">Mya</div>
-                <div class="member-role">Senior Barber</div>
-                <div class="member-rating">★★★★★ 5.0</div>
-            </div>
+        <div class="team-grid" id="teamGrid">
+            <!-- Team members will be inserted here by JavaScript -->
         </div>
     </section>
 
@@ -838,24 +886,24 @@
     <section class="about-section">
         <h2 class="section-title">About Us</h2>
         <div class="about-content">
+            <div class="about-image" id="aboutImage">📸</div>
             <div class="about-text">
-                <h3>Breathe Barbers</h3>
-                <p>
+                <h3 id="aboutTitle">Breathe Barbers</h3>
+                <p id="aboutParagraph1">
                     We transform the traditional barbering experience into a serene grooming retreat. 
                     With warm interiors and a welcoming atmosphere, our studio creates a space where 
                     clients feel at home.
                 </p>
-                <p>
+                <p id="aboutParagraph2">
                     Our team is seasoned with international expertise from Amsterdam to Ibiza, bringing 
                     contemporary techniques and modern styles to London. We provide exceptional haircuts 
                     and grooming services in a space built for conversation and connection.
                 </p>
-                <p>
+                <p id="aboutParagraph3">
                     Every visit is personalized. Our barbers take time to understand your style, preferences, 
                     and vision. The result? Haircuts that make you feel confident and look sharp.
                 </p>
             </div>
-            <div class="about-image">💈</div>
         </div>
     </section>
 
@@ -865,34 +913,12 @@
     <section id="reviews" class="reviews-section">
         <h2 class="section-title">Customer Reviews</h2>
         <div class="overall-rating">
-            <div class="rating-number">5.0 ★</div>
-            <div class="rating-text">Based on 468 customer reviews</div>
+            <div class="rating-number" id="overallRating">5.0 ★</div>
+            <div class="rating-text" id="reviewCount">Based on 468 customer reviews</div>
         </div>
 
-        <div class="reviews-grid">
-            <div class="review-card">
-                <div class="review-stars">★★★★★</div>
-                <div class="review-text">
-                    "Always an excellent experience when I visit Breathe Barbers. Debs was fantastic and always does a brilliant job. Highly recommended!"
-                </div>
-                <div class="review-author">Jonathan R</div>
-            </div>
-
-            <div class="review-card">
-                <div class="review-stars">★★★★★</div>
-                <div class="review-text">
-                    "Awesome! Always a pleasure to get a cut from Ed and have a chat. The atmosphere here is just perfect. 10/10"
-                </div>
-                <div class="review-author">Sam B</div>
-            </div>
-
-            <div class="review-card">
-                <div class="review-stars">★★★★★</div>
-                <div class="review-text">
-                    "Professionalism every time. The team is incredibly skilled and genuinely cares about each client. Highly recommended."
-                </div>
-                <div class="review-author">Jarosław K</div>
-            </div>
+        <div class="reviews-grid" id="reviewsGrid">
+            <!-- Reviews will be inserted here by JavaScript -->
         </div>
     </section>
 
@@ -906,45 +932,307 @@
             <div class="contact-info">
                 <div class="contact-item">
                     <h4>Address</h4>
-                    <p>59 Columbia Road</p>
-                    <p>Shoreditch, London E2 7RG</p>
-                    <a href="https://maps.google.com/?q=59+Columbia+Road+London" target="_blank">Get Directions →</a>
+                    <p id="addressLine1">59 Columbia Road</p>
+                    <p id="addressLine2">Shoreditch, London E2 7RG</p>
+                    <a href="#" id="directionsLink">Get Directions →</a>
                 </div>
 
                 <div class="contact-item">
                     <h4>Phone</h4>
-                    <p><a href="tel:+441234567890">+44 (0) 123 456 7890</a></p>
-                    <p><a href="sms:+441234567890">Text us</a></p>
+                    <p><a href="tel:+441234567890" id="phoneLink">+44 (0) 123 456 7890</a></p>
+                    <p><a href="sms:+441234567890" id="smsLink">Text us</a></p>
                 </div>
 
                 <div class="contact-item">
                     <h4>Hours</h4>
-                    <p>Mon - Fri: 8:00 AM - 8:00 PM</p>
-                    <p>Sat: 9:00 AM - 4:00 PM</p>
-                    <p>Sun: 10:00 AM - 4:00 PM</p>
+                    <p id="hoursMon">Mon - Fri: 8:00 AM - 8:00 PM</p>
+                    <p id="hoursSat">Sat: 9:00 AM - 4:00 PM</p>
+                    <p id="hoursSun">Sun: 10:00 AM - 4:00 PM</p>
                 </div>
 
                 <div class="contact-item">
                     <h4>Follow Us</h4>
-                    <p><a href="https://instagram.com" target="_blank">Instagram</a></p>
-                    <p><a href="https://facebook.com" target="_blank">Facebook</a></p>
+                    <p><a href="https://instagram.com" target="_blank" id="instagramLink">Instagram</a></p>
+                    <p><a href="https://facebook.com" target="_blank" id="facebookLink">Facebook</a></p>
                 </div>
             </div>
 
             <h3 class="section-title" style="margin-top: 2rem;">Location</h3>
-            <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.6066387183177!2d-0.069521!3d51.529362!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a7e5c5b5b5b5%3A0x1234567890abcdef!2s59%20Columbia%20Road%2C%20London%2C%20E2%207RG!5e0!3m2!1sen!2suk!4v1234567890" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div class="map-container" id="mapContainer">
+                <span>📍 Map will appear here</span>
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
     <footer>
-        <p>&copy; 2026 Breathe Barbers. All rights reserved. | Premium Grooming Experience</p>
+        <p id="footerText">&copy; 2026 Breathe Barbers. All rights reserved. | Premium Grooming Experience</p>
     </footer>
 
     <script>
-        // Mobile menu toggle
+        // ============================================
+        // TEMPLATE CONFIGURATION - EDIT THIS SECTION
+        // ============================================
+        
+        const CONFIG = {
+            // Business Info
+            business: {
+                name: "Breathe Barbers",
+                tagline: "Premium Grooming Experience",
+                description: "Expert barbers dedicated to transforming your look. Premium services, welcoming atmosphere, exceptional results.",
+                rating: 5.0,
+                reviewCount: 468,
+                address1: "59 Columbia Road",
+                address2: "Shoreditch, London E2 7RG",
+                phone: "+44 (0) 123 456 7890",
+                hours: {
+                    weekday: "Mon - Fri: 8:00 AM - 8:00 PM",
+                    saturday: "Sat: 9:00 AM - 4:00 PM",
+                    sunday: "Sun: 10:00 AM - 4:00 PM"
+                },
+                social: {
+                    instagram: "https://instagram.com",
+                    facebook: "https://facebook.com"
+                }
+            },
+
+            // About Section
+            about: {
+                title: "Breathe Barbers",
+                paragraphs: [
+                    "We transform the traditional barbering experience into a serene grooming retreat. With warm interiors and a welcoming atmosphere, our studio creates a space where clients feel at home.",
+                    "Our team is seasoned with international expertise from Amsterdam to Ibiza, bringing contemporary techniques and modern styles to London. We provide exceptional haircuts and grooming services in a space built for conversation and connection.",
+                    "Every visit is personalized. Our barbers take time to understand your style, preferences, and vision. The result? Haircuts that make you feel confident and look sharp."
+                ]
+            },
+
+            // Services
+            services: [
+                { name: "Shampoo & Cut", price: "£53", duration: "45 minutes", description: "Full wash, style consultation, and expert cut with personalized attention" },
+                { name: "Back & Sides", price: "£43", duration: "45 minutes", description: "Precision fade and shape-up for the sides and back" },
+                { name: "Beard Trim", price: "£25", duration: "30 minutes", description: "Shape, style, and condition your beard with premium products" },
+                { name: "Luxury Beard", price: "£55", duration: "45 minutes", description: "Complete beard treatment with massage and premium grooming" },
+                { name: "One Grade", price: "£20", duration: "30 minutes", description: "Quick and clean - uniform length trim throughout" },
+                { name: "Re-style", price: "£70", duration: "60 minutes", description: "Complete consultation and transformation with styling" }
+            ],
+
+            // Gallery Images (add your image paths here)
+            gallery: [
+                { src: "./images/gallery/studio-1.jpg", alt: "Studio 1" },
+                { src: "./images/gallery/studio-2.jpg", alt: "Studio 2" },
+                { src: "./images/gallery/studio-3.jpg", alt: "Studio 3" },
+                { src: "./images/gallery/studio-4.jpg", alt: "Studio 4" }
+            ],
+
+            // Team Members
+            team: [
+                { name: "Frankie", role: "Senior Barber", emoji: "👨‍🦱", rating: "5.0" },
+                { name: "Debs", role: "Senior Barber", emoji: "👩‍🦱", rating: "5.0" },
+                { name: "Carl", role: "Senior Barber", emoji: "👨‍🦱", rating: "5.0" },
+                { name: "Ed", role: "Senior Barber", emoji: "👨‍🦲", rating: "5.0" },
+                { name: "Mya", role: "Senior Barber", emoji: "👩‍🦱", rating: "5.0" }
+            ],
+
+            // Reviews
+            reviews: [
+                { stars: 5, text: "Always an excellent experience when I visit Breathe Barbers. Debs was fantastic and always does a brilliant job. Highly recommended!", author: "Jonathan R" },
+                { stars: 5, text: "Awesome! Always a pleasure to get a cut from Ed and have a chat. The atmosphere here is just perfect. 10/10", author: "Sam B" },
+                { stars: 5, text: "Professionalism every time. The team is incredibly skilled and genuinely cares about each client. Highly recommended.", author: "Jarosław K" }
+            ],
+
+            // Images (add your image paths here)
+            images: {
+                logo: "./images/logo.jpg",  // Optional: replace with business logo
+                hero: "./images/hero-bg.jpg",  // Hero background image
+                about: "./images/about-section.png"  // About section image
+            },
+
+            // Map (embed code from Google Maps)
+            mapEmbed: `<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.6066387183177!2d-0.069521!3d51.529362!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a7e5c5b5b5b5%3A0x1234567890abcdef!2s59%20Columbia%20Road%2C%20London%2C%20E2%207RG!5e0!3m2!1sen!2suk!4v1234567890" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`
+        };
+
+        // ============================================
+        // INITIALIZATION & RENDERING
+        // ============================================
+
+        function initializeTemplate() {
+            // Update Business Info
+            document.getElementById('businessName').textContent = CONFIG.business.name;
+            document.getElementById('heroTitle').textContent = CONFIG.business.tagline;
+            document.getElementById('heroSubtitle').textContent = CONFIG.business.description;
+            document.getElementById('heroRating').textContent = `${CONFIG.business.rating} ★ (${CONFIG.business.reviewCount} reviews)`;
+            document.getElementById('footerText').textContent = `&copy; 2026 ${CONFIG.business.name}. All rights reserved. | ${CONFIG.business.tagline}`;
+
+            // Update Contact Info
+            document.getElementById('addressLine1').textContent = CONFIG.business.address1;
+            document.getElementById('addressLine2').textContent = CONFIG.business.address2;
+            document.getElementById('phoneLink').href = `tel:${CONFIG.business.phone}`;
+            document.getElementById('phoneLink').textContent = CONFIG.business.phone;
+            document.getElementById('smsLink').href = `sms:${CONFIG.business.phone}`;
+            document.getElementById('directionsLink').href = `https://maps.google.com/?q=${CONFIG.business.address1}+${CONFIG.business.address2}`;
+
+            document.getElementById('hoursMon').textContent = CONFIG.business.hours.weekday;
+            document.getElementById('hoursSat').textContent = CONFIG.business.hours.saturday;
+            document.getElementById('hoursSun').textContent = CONFIG.business.hours.sunday;
+
+            document.getElementById('instagramLink').href = CONFIG.business.social.instagram;
+            document.getElementById('facebookLink').href = CONFIG.business.social.facebook;
+
+            // Update About Section
+            document.getElementById('aboutTitle').textContent = CONFIG.about.title;
+            document.getElementById('aboutParagraph1').textContent = CONFIG.about.paragraphs[0];
+            document.getElementById('aboutParagraph2').textContent = CONFIG.about.paragraphs[1];
+            document.getElementById('aboutParagraph3').textContent = CONFIG.about.paragraphs[2];
+
+            // Render Services
+            renderServices();
+
+            // Render Gallery
+            renderGallery();
+
+            // Render Team
+            renderTeam();
+
+            // Render Reviews
+            renderReviews();
+
+            // Set Hero Background
+            setHeroBackground();
+
+            // Set Logo (optional)
+            setLogo();
+
+            // Set About Image
+            setAboutImage();
+
+            // Set Map
+            setMap();
+        }
+
+        function renderServices() {
+            const grid = document.getElementById('servicesGrid');
+            grid.innerHTML = CONFIG.services.map(service => `
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-name">${service.name}</div>
+                        <div class="service-price">${service.price}</div>
+                    </div>
+                    <div class="service-duration">${service.duration}</div>
+                    <div class="service-description">${service.description}</div>
+                    <button class="service-btn">Book Service</button>
+                </div>
+            `).join('');
+        }
+
+        function renderGallery() {
+            const grid = document.getElementById('galleryGrid');
+            grid.innerHTML = CONFIG.gallery.map((item, index) => `
+                <div class="gallery-item" onclick="openLightbox(${index})">
+                    <img src="${item.src}" alt="${item.alt}" onerror="this.style.display='none'; this.parentElement.innerHTML='📸'">
+                </div>
+            `).join('');
+        }
+
+        function renderTeam() {
+            const grid = document.getElementById('teamGrid');
+            grid.innerHTML = CONFIG.team.map(member => `
+                <div class="team-member">
+                    <div class="member-image">${member.emoji}</div>
+                    <div class="member-name">${member.name}</div>
+                    <div class="member-role">${member.role}</div>
+                    <div class="member-rating">★★★★★ ${member.rating}</div>
+                </div>
+            `).join('');
+        }
+
+        function renderReviews() {
+            const grid = document.getElementById('reviewsGrid');
+            const stars = (count) => '★'.repeat(count);
+            grid.innerHTML = CONFIG.reviews.map(review => `
+                <div class="review-card">
+                    <div class="review-stars">${stars(review.stars)}</div>
+                    <div class="review-text">"${review.text}"</div>
+                    <div class="review-author">${review.author}</div>
+                </div>
+            `).join('');
+        }
+
+        function setHeroBackground() {
+            if (CONFIG.images.hero) {
+                document.getElementById('heroSection').style.backgroundImage = 
+                    `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('${CONFIG.images.hero}')`;
+            }
+        }
+
+        function setLogo() {
+            if (CONFIG.images.logo) {
+                const logoDiv = document.getElementById('logoImage');
+                logoDiv.innerHTML = `<img src="${CONFIG.images.logo}" alt="Logo">`;
+            }
+        }
+
+        function setAboutImage() {
+            if (CONFIG.images.about) {
+                const aboutDiv = document.getElementById('aboutImage');
+                aboutDiv.innerHTML = `<img src="${CONFIG.images.about}" alt="About Us">`;
+            }
+        }
+
+        function setMap() {
+            if (CONFIG.mapEmbed) {
+                document.getElementById('mapContainer').innerHTML = CONFIG.mapEmbed;
+            }
+        }
+
+        // ============================================
+        // GALLERY LIGHTBOX FUNCTIONALITY
+        // ============================================
+
+        let currentImageIndex = 0;
+
+        function openLightbox(index) {
+            currentImageIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightboxImage');
+            lightboxImage.src = CONFIG.gallery[index].src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % CONFIG.gallery.length;
+            document.getElementById('lightboxImage').src = CONFIG.gallery[currentImageIndex].src;
+        }
+
+        function prevImage() {
+            currentImageIndex = (currentImageIndex - 1 + CONFIG.gallery.length) % CONFIG.gallery.length;
+            document.getElementById('lightboxImage').src = CONFIG.gallery[currentImageIndex].src;
+        }
+
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeLightbox();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (document.getElementById('lightbox').classList.contains('active')) {
+                if (e.key === 'ArrowRight') nextImage();
+                if (e.key === 'ArrowLeft') prevImage();
+                if (e.key === 'Escape') closeLightbox();
+            }
+        });
+
+        // ============================================
+        // MOBILE MENU
+        // ============================================
+
         const menuToggle = document.getElementById('menuToggle');
         const mobileMenu = document.getElementById('mobileMenu');
 
@@ -952,19 +1240,20 @@
             mobileMenu.classList.toggle('active');
         });
 
-        // Close menu when link is clicked
         document.querySelectorAll('.mobile-menu a').forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.remove('active');
             });
         });
 
-        // Location clickable
+        // ============================================
+        // LOCATION & NAVIGATION
+        // ============================================
+
         document.getElementById('locationClickable').addEventListener('click', () => {
-            window.open('https://maps.google.com/?q=59+Columbia+Road+London', '_blank');
+            window.open(`https://maps.google.com/?q=${CONFIG.business.address1}+${CONFIG.business.address2}`, '_blank');
         });
 
-        // Smooth scroll for all anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -974,6 +1263,12 @@
                 }
             });
         });
+
+        // ============================================
+        // INITIALIZE ON LOAD
+        // ============================================
+
+        document.addEventListener('DOMContentLoaded', initializeTemplate);
     </script>
 </body>
 </html>
